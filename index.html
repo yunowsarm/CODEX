@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>图片/压缩包双格式生成器</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="container">
+      <h1>图片 + ZIP 双格式文件生成器</h1>
+      <p class="subtitle">
+        选择一张图片和一个 ZIP，本工具会把它们拼接成一个文件：可按图片打开，也可改后缀为
+        <code>.zip</code> 解压。
+      </p>
+
+      <section class="card">
+        <div class="field">
+          <label for="imageInput">1) 选择图片文件（建议 JPG）</label>
+          <input id="imageInput" type="file" accept="image/*" />
+          <small id="imageMeta">未选择文件</small>
+        </div>
+
+        <div class="field">
+          <label for="zipInput">2) 选择 ZIP 文件</label>
+          <input id="zipInput" type="file" accept=".zip,application/zip" />
+          <small id="zipMeta">未选择文件</small>
+        </div>
+
+        <div class="actions">
+          <button id="buildBtn" disabled>生成复合文件</button>
+          <button id="downloadImageBtn" disabled>下载为图片后缀</button>
+          <button id="downloadZipBtn" disabled>下载为 .zip</button>
+        </div>
+      </section>
+
+      <section class="card preview-card">
+        <h2>图片预览</h2>
+        <img id="preview" alt="图片预览" />
+      </section>
+
+      <section class="card log-card">
+        <h2>状态日志</h2>
+        <ul id="logList"></ul>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
