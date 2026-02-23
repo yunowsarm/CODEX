@@ -8,43 +8,45 @@
   </head>
   <body>
     <main class="container">
-      <h1>图片 + ZIP 双格式文件生成器</h1>
-      <p class="subtitle">
-        选择一张图片和一个 ZIP，本工具会把它们拼接成一个文件：可按图片打开，也可改后缀为
-        <code>.zip</code> 解压。
-      </p>
-
+      <h1>图片 + 压缩包 双格式文件生成器</h1>
       <section class="card">
-        <div class="field">
-          <label for="imageInput">1) 选择图片文件（建议 JPG）</label>
-          <input id="imageInput" type="file" accept="image/*" />
+        <div class="field file-field file-field--folder">
+          <span class="field-label">1) 文件存储位置</span>
+          <button type="button" id="chooseDirBtn" class="file-picker-btn-standalone">选择文件夹</button>
+          <small id="saveDirMeta">未选择</small>
+        </div>
+
+        <div class="field file-field file-field--image">
+          <span class="field-label">2) 选择图片文件（建议 JPG）</span>
+          <label class="file-picker" for="imageInput">
+            <input id="imageInput" type="file" accept="image/*" />
+            <span class="file-picker-btn">选择图片</span>
+          </label>
           <small id="imageMeta">未选择文件</small>
         </div>
 
-        <div class="field">
-          <label for="zipInput">2) 选择 ZIP 文件</label>
-          <input id="zipInput" type="file" accept=".zip,application/zip" />
+        <div class="field file-field file-field--zip">
+          <span class="field-label">3) 选择压缩包文件</span>
+          <label class="file-picker" for="zipInput">
+            <input id="zipInput" type="file" accept=".zip,application/zip" />
+            <span class="file-picker-btn">选择压缩包文件</span>
+          </label>
           <small id="zipMeta">未选择文件</small>
         </div>
 
         <div class="actions">
-          <button id="buildBtn" disabled>生成复合文件</button>
-          <button id="downloadImageBtn" disabled>下载为图片后缀</button>
-          <button id="downloadZipBtn" disabled>下载为 .zip</button>
+          <button id="buildBtn" disabled>生成</button>
+          <button id="openFolderBtn" type="button" class="btn-reset" disabled>打开生成文件夹</button>
+          <button id="resetBtn" type="button" class="btn-reset">重置</button>
         </div>
       </section>
 
-      <section class="card preview-card">
+      <section class="card preview-card hidden" id="previewCard">
         <h2>图片预览</h2>
         <img id="preview" alt="图片预览" />
       </section>
-
-      <section class="card log-card">
-        <h2>状态日志</h2>
-        <ul id="logList"></ul>
-      </section>
     </main>
-
+    <div id="toastContainer" class="toast-container"></div>
     <script src="app.js"></script>
   </body>
 </html>

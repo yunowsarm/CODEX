@@ -3,10 +3,23 @@
   font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
 }
 
+html {
+  overflow-y: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none;
+}
+
 body {
   margin: 0;
   background: #f3f6fc;
   color: #122;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
 .container {
@@ -39,10 +52,97 @@ h1 {
   margin-bottom: 0.9rem;
 }
 
-input[type='file'] {
-  border: 1px solid #d0d8ea;
-  border-radius: 8px;
-  padding: 0.5rem;
+.file-field .field-label {
+  font-weight: 600;
+  color: #334155;
+  font-size: 0.95rem;
+}
+
+.file-picker {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.6rem 1.25rem;
+  border: 2px dashed #cbd5e1;
+  border-radius: 10px;
+  background: #f8fafc;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.file-picker:hover {
+  border-color: #94a3b8;
+  background: #f1f5f9;
+}
+
+.file-picker input[type='file'] {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+  font-size: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* 文件选择区：.file-picker（选择图片/压缩包） */
+.file-picker-btn {
+  font-weight: 600;
+  color: #475569;
+  pointer-events: none;
+}
+
+.file-field--image .file-picker:hover {
+  border-color: #3b82f6;
+  background: #eff6ff;
+}
+
+.file-field--image .file-picker:hover .file-picker-btn {
+  color: #2563eb;
+}
+
+.file-field--zip .file-picker:hover {
+  border-color: #0d9488;
+  background: #f0fdfa;
+}
+
+.file-field--zip .file-picker:hover .file-picker-btn {
+  color: #0f766e;
+}
+
+/* 独立按钮：.file-picker-btn-standalone（选择文件夹） */
+.file-picker-btn-standalone {
+  padding: 0.6rem 1.25rem;
+  border: 2px dashed #cbd5e1;
+  border-radius: 10px;
+  background: #f8fafc;
+  color: #475569;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.file-picker-btn-standalone:hover {
+  border-color: #94a3b8;
+  background: #f1f5f9;
+}
+
+.file-field--folder .file-picker-btn-standalone:hover {
+  border-color: #facc15;
+  background: #fef9c3;
+  color: #b45309;
+}
+
+.file-field small {
+  margin-top: 0.15rem;
+}
+
+.file-field small.meta-filled {
+  background: #e2e8f0;
+  border-radius: 6px;
+  padding: 4px 8px;
+  display: inline-block;
 }
 
 small {
@@ -63,11 +163,28 @@ button {
   color: #fff;
   font-weight: 600;
   cursor: pointer;
+  transition: all 0.2s;
 }
 
 button:disabled {
   background: #9da9c8;
   cursor: not-allowed;
+}
+
+.btn-reset {
+  margin-left: auto;
+  background: transparent;
+  color: #64748b;
+  border: 1px solid #cbd5e1;
+}
+
+.btn-reset:hover {
+  background: #f1f5f9;
+  color: #475569;
+}
+
+.preview-card.hidden {
+  display: none;
 }
 
 .preview-card img {
@@ -78,6 +195,10 @@ button:disabled {
   border-radius: 12px;
 }
 
+.log-card.hidden {
+  display: none;
+}
+
 .log-card ul {
   margin: 0;
   padding-left: 1.2rem;
@@ -85,4 +206,53 @@ button:disabled {
 
 .log-card li {
   line-height: 1.6;
+}
+
+/* ElMessage 风格提示 */
+.toast-container {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  pointer-events: none;
+}
+
+.toast-message {
+  padding: 12px 20px;
+  min-width: 200px;
+  text-align: center;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  background: #fff;
+  font-size: 14px;
+  color: #303133;
+  pointer-events: auto;
+  animation: toast-in 0.3s ease;
+}
+
+.toast-message.toast-success {
+  background: #f0f9eb;
+  color: #67c23a;
+}
+
+.toast-message.toast-out {
+  opacity: 0;
+  transform: translateY(-8px);
+  transition: opacity 0.2s, transform 0.2s;
+}
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
