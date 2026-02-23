@@ -43,8 +43,7 @@ npm run build:dir
 - 兼容性取决于具体查看器/解压器，建议在目标环境中测试。
 - 所有操作在本地完成，不会上传任何文件。
 
-
-<div align="center">
+- <div align="center">
   <img
     src="https://github.com/user-attachments/assets/26c20e52-668a-4297-be5c-95455ff976a7"
     width="782"
